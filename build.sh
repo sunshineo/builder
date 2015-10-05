@@ -31,7 +31,8 @@ elif [ -d /.docker ]; then
 	ln -s /.docker /root/.docker
 elif [ ! -z "$DOCKERCFG" ]; then
 	print_msg "   Detected configuration in \$DOCKERCFG"
-	echo "$DOCKERCFG" > /root/.dockercfg
+	mkdir /root/.docker
+	echo "$DOCKERCFG" > /root/.docker/config.json
 	unset DOCKERCFG
 elif [ ! -z "$USERNAME" ] && [ ! -z "$PASSWORD" ]; then
 	REGISTRY=$(echo $IMAGE_NAME | tr "/" "\n" | head -n1 | grep "\." || true)
